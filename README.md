@@ -2,8 +2,9 @@
 Course work for Programming Data // Spring 2022
 ---
 title: "README.md"
+
 author: Christopher O'Donnell
-output: html_document
+
 ---
 
 This repository is a culmination of work I will be doing for my __Data Analysis Course!__
