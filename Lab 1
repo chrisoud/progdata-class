@@ -1,0 +1,22 @@
+install.packages("tidyverse")
+install.packages("palmerpenguins")
+
+
+
+library(palmerpenguins)
+data= palmerpenguins::penguins
+
+#First 5 rows of Palmerpenguins data set
+head(data)
+
+#Last 5 rows of data set
+tail(data)
+
+#Full summary showing mean, min, max for each statistical category
+summary(data)
+
+#Mean Flipper Length
+mean(data$flipper_length_mm, na.rm = TRUE)
+
+#Plot showing penguin species population numbers 
+plot(data$species)
