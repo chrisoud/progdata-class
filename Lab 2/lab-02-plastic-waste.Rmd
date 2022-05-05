@@ -1,0 +1,154 @@
+---
+title: "Lab 02 - Plastic waste"
+author: "Christopher O'Donnell"
+date: "April 27 2022"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+## Load packages and data
+
+```{r setup, message=FALSE}
+# Load the tidyverse package
+```
+
+library(tidyverse)
+
+install.packages("ggplot2", dependencies = TRUE)
+
+library(ggplot2)
+
+remove.packages("ggplot2")
+
+```{r load-data, message=FALSE}
+plastic_waste <- read.csv(here::here("data/plastic-waste.csv"))
+```
+
+plastic_waste = read.csv("data/plastic-waste.csv")
+
+head(plastic_waste)
+
+## Exercises
+
+### Exercise 1
+
+Remove this text, and add your answer for Exercise 1 here.
+
+```{r plastic-waste-continent}
+
+Histo = ggplot(plastic_waste) + 
+  aes(x = plastic_waste_per_cap) +
+  facet_wrap(~continent) +
+  geom_histogram(binwidth = .2)
+  
+
+ggplot(plastic_waste) +
+  aes( x = plastic_waste_per_cap) +
+  geom_density()
+  
+
+```
+
+### Exercise 2
+
+```{r plastic-waste-density}
+# Density + Histo with colored continents
+
+Histo +
+  aes(y = after_stat(count), color = continent) +
+  geom_density(alpha = .2)
+
+```
+
+
+### Exercise 3
+# Box Plot
+
+Box = ggplot(plastic_waste)+
+ aes(x = continent,  y = plastic_waste_per_cap, color = continent)+
+ geom_boxplot()
+ 
+
+# Box Plot individual points
+
+Box + 
+geom_jitter()
+
+Box +
+geom_jitter() +
+geom_violin(height = .3, color= "black", size=.2, alpha=.5, position = position_nudge(y=.2))
+
+I'm not sure why but rstudio continues to not allow me to use ggdist! I used a violin instead, I hope this is understandable.
+
+### Exercise 4
+
+The individual and raincloud plots are able to show which continents hold more outliers than others. The statistics are just far more transparent and insightful.
+
+
+
+### Exercise 5
+#Scatter plot for plastic waste / mismanaged plastic waste per cap
+
+scatter = ggplot(plastic_waste) +
+  aes( x = plastic_waste_per_cap, y = mismanaged_plastic_waste_per_cap) +
+  geom_point()
+
+```{r plastic-waste-mismanaged}
+# insert code here
+```
+
+The relationship is as plastic waste increases per capita, so does the mismanaged plastic waste per capita.
+
+### Exercise 6
+#Colored scatter plot
+
+ggplot(plastic_waste) +
+  aes( x = plastic_waste_per_cap, y = mismanaged_plastic_waste_per_cap, color = continent) +
+  geom_point()
+
+Yes, continents such as Europe obviously manage plastic waste far better per capita than continents such as Asia. Africa also struggles with low plastic waste per capita and high mismanaged plastic waste. North America is relatively low in mismanaged waste compared plastic waste per capita.
+
+
+### Exercise 7
+
+
+
+```{r plastic-waste-population-total}
+ggplot(plastic_waste) +
+  aes(x = total_pop, y = plastic_waste_per_cap) +
+  geom_point()
+
+```
+
+```{r plastic-waste-population-coastal}
+ggplot(plastic_waste) +
+  aes(x= coastal_pop, y= plastic_waste_per_cap) +
+  geom_point()
+
+```
+
+### Exercise 8
+Yes, the total population scatter plot shows a stronger density and correlation between the population size and plastic waste per capita.The coastal population holds some correlation, but this begins to fade as certain populations grow without an increase in plastic waste per capita.
+
+## Pro-Tips
+
+### Excercise 3
+
+Try this :D
+
+```
+ggplot(data = plastic_waste, 
+       mapping = aes(x = continent, 
+                     y = plastic_waste_per_cap)) +
+  geom_violin()+
+  geom_boxplot(width=.3, fill="green") +
+  stat_summary(fun.y=median, geom="point") 
+```
+
+### Exercise 5 
+
+Helpful reference:http://www.sthda.com/english/wiki/ggplot2-themes-and-background-colors-the-3-elements
+
+
+
