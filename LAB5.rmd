@@ -1,0 +1,66 @@
+---
+title: "Lab5b.rmd"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+library(tidyverse)
+set.seed(123)
+missing_w2_parent <- sample(1:500, 30)
+missing_w2_child <- c(missing_w2_parent[1:5], sample(1:500, 25))
+family  <- read_csv(
+  "https://raw.githubusercontent.com/bwiernik/progdata/main/inst/tutorials/data/family_data.csv"
+) |> 
+  mutate(
+    across(
+      starts_with("w2") & contains("parent"),
+      ~ ifelse(family_id %in% missing_w2_parent, NA_real_, .x)
+    ),
+    across(
+      starts_with("w2") & contains("child"),
+      ~ ifelse(family_id %in% missing_w2_child, NA_real_, .x)
+    )
+  )
+  
+  
+family |> 
+  knitr::kable()
+
+  
+  
+  
+family_longest= family %>%
+pivot_longer(
+cols= -family_id,
+names_to=c("wave", "scale",  "family_member"),
+names_sep = "_"
+)
+
+print(family_longest)
+  
+  
+
+family_long = family %>%
+pivot_longer(
+cols= -family_id,
+names_to=c("wave", ".value", "family_member"),
+names_sep = "_"
+)
+
+print(family_long)
+
+
+print(family)
+
+which(is.na(family_long))
+
+head(family_long, 57)
+
+#I found out which lines were missing W2 data, but not which family as I didn't know the correct function, I used is.na to find the NA data sets. After this, I was very lost and came up with certain families by looking directly at the console.
+
+summary(family_long)
+
+Family 4, 12, 14, 16, 22 were missing data.

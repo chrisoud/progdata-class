@@ -1,0 +1,34 @@
+---
+title: "Lab 5a Univarate Pivoting.rmd"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+lotr  <- read_csv("https://raw.githubusercontent.com/jennybc/lotr-tidy/master/data/lotr_tidy.csv") |> 
+  rename(Species = Race)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##Number 1 
+
+This data is untidy.
+
+summary(lotr)
+
+##Number 2 
+
+(lotr_wide <- lotr |> 
+  pivot_wider(id_cols = c(Film, Gender), 
+              names_from = Species, 
+              values_from= Words))
+              
+##Number 3
+
+lotr_wide |> 
+  pivot_longer(cols = c(Elf, Hobbit, Man), 
+               names_to  = "Species", 
+               values_to = "Words")
+              
+              
+              
