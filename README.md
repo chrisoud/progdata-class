@@ -6,6 +6,12 @@ title: "README.md"
 author: Christopher O'Donnell
 
 ---
+[Portfolio Piece 1( website! I don't have much to show professionally yet :/ )](https://github.com/chrisoud/chrisoud.github.io)
+
+
+[Portfolio Piece 2( Data Analysis )](https://github.com/chrisoud/Data-Analysis)
+
+---
 
 This repository is a culmination of work I will be doing for my __Data Analysis Course!__
 
